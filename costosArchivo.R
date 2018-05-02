@@ -136,14 +136,14 @@ for(tipo in vectorTipo){
         dim(utRenTipOut)
         unique(utRenTipOut$tipoProduccion)
         
-        valoresExtremos <- extremos(utRenTipOut$INGRESOS....ha.)
+        valoresExtremos <- extremos(utRenTipOut$COSTOS.PRODUCCION....ha.)
         
         # ````````````````````````````````````````````````````````````````````````````````````````
         # Encontrar los outliers de un vector de datos, despues almacenalos en una nueva variable
         # ````````````````````````````````````````````````````````````````````````````````````````
         ## Validar si un valor es un outlier, guardar T o F en un vector
         count = 0       
-        for(i in utRenTipOut$INGRESOS....ha.){
+        for(i in utRenTipOut$COSTOS.PRODUCCION....ha.){
                 if(count == 0){
                         if(i > valoresExtremos[1] | i < valoresExtremos[2]){
                                 esOutlier = TRUE
@@ -170,9 +170,9 @@ for(tipo in vectorTipo){
         
         
         ## Crear una nueva columna en el set de datos con los valores V o F de outliers
-        utRenTipOut$INGRESOS_outlier <- esOutlier
+        utRenTipOut$COSTOS_outlier <- esOutlier
         dim(utRenTipOut)
-        utRenTip <- utRenTipOut[utRenTipOut$INGRESOS_outlier == FALSE, ]
+        utRenTip <- utRenTipOut[utRenTipOut$COSTOS_outlier == FALSE, ]
         dim(utRenTip)
         # ````````````````````````````````````````````````````````````````````````````````````````
         
@@ -198,14 +198,14 @@ for(tipo in vectorTipo){
 
 dim(UtilidadFinal)
 names(UtilidadFinal)
-utilidadLimpia <- UtilidadFinal[,c(1, 19, 2:18, 20:27, 49, 52)]
+utilidadLimpia <- UtilidadFinal[,c(1, 19, 2:18, 20:27, 50, 52)]
 names(utilidadLimpia)[1] <- 'ID de la bitácora'
 names(utilidadLimpia)[2] <- 'ID de tipo de bitácora'
 
 
-if(!dir.exists('./salida')){dir.create('./salidaIngresos')}
+if(!dir.exists('./salidaCostos')){dir.create('./salidaCostos')}
 
-nombreArchivo <- paste('./salidaIngresos/', 'ingresos2017.csv')
+nombreArchivo <- paste('./salidaCostos/', 'costos2017.csv')
 nombreArchivo <- str_replace_all(nombreArchivo, pattern=" ", repl="")
 write.csv(utilidadLimpia, file = nombreArchivo, row.names = FALSE)
 
